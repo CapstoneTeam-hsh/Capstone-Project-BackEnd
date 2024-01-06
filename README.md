@@ -70,3 +70,24 @@
     <br><br>
     
 ---
+
+User API
+
+| index | Method | URI | Description | Request Parameters | Response Parameters | HTTP Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | POST | /users | 유저등록(생성) | name: 유저 이름(String,required) email: 유저 이메일(String,required) userId: 유저 아이디(String,required) password: 유저 비밀번호(String,required)| responseCode:“USER_RESISTED”responseMessage: “유저 등록 완료” data: (유저 정보를 담은Dto(UserDto) | 201: Created(요청이 정상적으로 처리됨)400: Bad Request(요청 파라미터에 문제가 있는 경우) |
+| 2 | DELETE | /users/{userId} | 유저 계정 삭제(삭제) | userId:유저의 아이디(Long,required) | responseCode:“User_DELETED” responseMessage: “유저 등록 해제” | 204: No Content(요청이 정상적으로 처리 됨)404: Not Found(해당하는 식별자가 존재하지 않는 경우) |
+| 3 | GET | /users/{userId} | 유저 정보 조회 | userId: 유저 아이디(Long,required)  | responseCode:“USER_FOUND” reponseMessage: “유저 프로필 조회 완료”data: (유저  정보를 담은 Dto(UserDto) | 200: OK (요청이 정상적으로 처리됨404: Not Found (해당하는 식별자가 존재하지 않는 경우) |
+| 4 | PUT | /users/{userId} | 유저 정보 수정 | userId: 유저 아이디(Long, required)name: 유저 이름(String,required) email: 유저 이메일(String,required) userId: 유저 아이디(String,required) password: 유저 비밀번호(String,required) | responseCode:"USER_UPDATED"responseMessage: "유저 정보 수정 완료"data: (유저 정보를 담은 Dto (UserDto) | 200: OK (요청이 정상적으로 처리됨)400: Bad Request (요청 파라미터에 문제가 있는 경우) |
+| 5 | GET | /users/todos/{userId} | 유저 번호로 게시글 조회 | userId:유저의 아이디(Long,required) | responseCode:"USERBOARD_FOUND" responseMessage: "유저의 투두 조회 완료"data: (유저 리스트에 있는 게시물Dto(todoDto) | 200: OK (요청이 정상적으로 처리됨404: Not Found (해당하는 식별자가 존재하지 않는 경우) |
+
+Todo API
+
+| index | Method | URI | Description | Request Parameters | Response Parameters | HTTP Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | POST | /todos/{userId} | 게시물 작성 | user: 유저 객체(User,required) title: 투두 제목(String,required) content: 내용(String, required) | reponseCode: “BOARD_REGISTERD” responseMessage: “게시물 등록 완료”data: (게시물 정보를 담은 Dto(BoardDto) | 201: Created (요청이 정상적으로 처리됨)400: Bad Request (요청 파라미터에 문제가 있는 경우) |
+| 2 | DELETE | /todos/{todoId} | 투두 삭제 | todoId:투두 번호(Long,equired) | responseCode: “todo_DELETED” responseMessage: “게시물  삭제 완료” | 200: Ok (요청이 정상적으로 처리됨) 404: Not Found(해당하는 식별자가 존재하지 않는 경우) |
+| 3 | PUT | /todos/{todoId} | 투두 수정 | userId: 유저아이디(Long,required) title: 투두 제목(String,required) content: 내용(String, required) checked: 할일 성공여부(boolean) | responseCode: "BOARD_UPDATED"responseMessage: "게시물 수정 완료"data: (게시물 정보를 담은 Dto (BoardDto)) | 200: OK (요청이 정상적으로 처리됨)400: Bad Request (요청 파라미터에 문제가 있는 경우)404: Not Found(해당하는 식별자가 존재하지 않는 경우) |
+| 4 | GET | /todos/{todoId} | 투두 아이디로 투두 검색 | todoId: 투두 번호(Long,required) | responseCode: “BOARD_FOUND”responseMessage: “ 게시물 번호로 조회 완료”data :(해당 투두 정보를 담은 Dto(todoDto) | 200: OK (요청이 정상적으로 처리됨)404: Not Found (해당하는 식별자가 존재하지 않는 경우 |
+| 5 | GET | /todos/{keyword} | 투두 제목 키워드로 조회 | keyword: 키워드(String,required) | responseCode: “BOARD_FOUND”responseMessage: “ 투두 제목 키워드로 조회 완료”data :(해당 투두 정보를 담은 Dto(todoDto) | 200: OK (요청이 정상적으로 처리됨)404: Not Found (해당하는 식별자가 존재하지 않는 경우 |
+
