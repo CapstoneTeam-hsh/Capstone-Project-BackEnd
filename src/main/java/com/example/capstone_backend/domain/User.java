@@ -1,6 +1,5 @@
 package com.example.capstone_backend.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -35,6 +34,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Todo> todoList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<UserTeam> userToGroups = new ArrayList<>();
 
     @Builder
     public User(String uid, String password, String name, String email)

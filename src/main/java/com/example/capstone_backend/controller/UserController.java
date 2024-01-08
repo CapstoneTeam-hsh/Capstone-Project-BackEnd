@@ -1,6 +1,7 @@
 package com.example.capstone_backend.controller;
 
 import com.example.capstone_backend.dto.Request.UserRequestDto;
+import com.example.capstone_backend.dto.Response.TeamResponseDto;
 import com.example.capstone_backend.dto.Response.TodoResponseDto;
 import com.example.capstone_backend.dto.Response.UserResponseDto;
 import com.example.capstone_backend.service.UserService;
@@ -72,6 +73,16 @@ public class UserController {
         List<TodoResponseDto> userTodoList = userService.getTodosByUserId(userId);
 
         return ResponseEntity.status(HttpStatus.OK).body(userTodoList);
+    }
+    
+    @Operation(summary = "유저 그룹 조회", description = "유저 아이디로 유저가 속한 그룹을 조회합니다.")
+    @Parameter(name="uid",description = "유저 로그인 아이디" )
+    @GetMapping("/groups/{uid}")
+    public ResponseEntity<List<TeamResponseDto>> getGroupList(@PathVariable(name="uid") String uid){
+        log.info("[getGroupList] 유저 아이디로 유저가 속한 그룹을 조회합니다.");
+        List<TeamResponseDto> teamResponseDtos = userService.getTeamByUid(uid);
+
+        return ResponseEntity.status(HttpStatus.OK).body(teamResponseDtos);
     }
 
 
